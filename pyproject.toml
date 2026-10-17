@@ -1,0 +1,26 @@
+[project]
+name = "nanonn"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "zhouzuoshui", email = "zuoshui.zhou@outlook.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "cuda-toolkit[cublas,cudart,curand,nvrtc]>=13,<14",
+    "cupy-cuda13x>=14.2.0",
+    "numpy>=2.5.4",
+]
+
+[project.scripts]
+nanonn = "nanonn:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"
+
+# src/ 下有两个顶层模块：框架本体 nanonn 与示例训练代码 resnet18。
+# 显式声明后，`uv sync` 会把两者都装进环境，无需设置 PYTHONPATH。
+[tool.uv.build-backend]
+module-name = ["nanonn", "resnet18"]
